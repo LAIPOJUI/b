@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}新增文章{% endblock %}
+{% block content %}
+  <form method="post">
+    <div class="row">
+      <label>標題</label>
+      <input type="text" name="title" value="{{ title or '' }}" required>
+    </div>
+    <div class="row">
+      <label>日期</label>
+      <input type="date" name="date" value="{{ date or '' }}" required>
+    </div>
+    <div class="row">
+      <label>內容</label>
+      <textarea name="content" required>{{ content or '' }}</textarea>
+    </div>
+    <div class="row">
+      <button class="btn primary" type="submit">儲存</button>
+      <a class="btn" href="{{ url_for('index') }}">取消</a>
+    </div>
+  </form>
+{% endblock %}

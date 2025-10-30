@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}日誌列表{% endblock %}
+{% block content %}
+  {% if entries %}
+    {% for e in entries %}
+      <div class="card">
+        <h3 style="margin:0 0 6px 0;">
+          <a href="{{ url_for('show_entry', entry_id=e.id) }}">{{ e.title }}</a>
+        </h3>
+        <div class="muted">{{ e.date.strftime("%Y-%m-%d") }}</div>
+        <p style="margin-top:8px;">{{ e.content[:120] }}{% if e.content|length > 120 %}…{% endif %}</p>
+        <a class="btn" href="{{ url_for('show_entry', entry_id=e.id) }}">閱讀更多</a>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>目前還沒有文章，<a href="{{ url_for('create_entry') }}">寫一篇吧！</a></p>
+  {% endif %}
+{% endblock %}

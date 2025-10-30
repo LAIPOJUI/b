@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}編輯：{{ entry.title }}{% endblock %}
+{% block content %}
+  <form method="post">
+    <div class="row">
+      <label>標題</label>
+      <input type="text" name="title" value="{{ entry.title }}" required>
+    </div>
+    <div class="row">
+      <label>日期</label>
+      <input type="date" name="date" value="{{ entry.date.strftime('%Y-%m-%d') }}" required>
+    </div>
+    <div class="row">
+      <label>內容</label>
+      <textarea name="content" required>{{ entry.content }}</textarea>
+    </div>
+    <div class="row">
+      <button class="btn primary" type="submit">更新</button>
+      <a class="btn" href="{{ url_for('show_entry', entry_id=entry.id) }}">取消</a>
+    </div>
+  </form>
+{% endblock %}

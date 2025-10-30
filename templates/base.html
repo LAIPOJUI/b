@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}個人日誌{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <style>
+    body { font-family: system-ui, -apple-system, "Noto Sans TC", Arial, sans-serif; margin: 24px; }
+    header { display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+    a { text-decoration: none; color: #0b61a4; }
+    .btn { display:inline-block; padding:8px 12px; border-radius:8px; border:1px solid #ccc; }
+    .btn.primary { background:#0b61a4; color:white; border-color:#0b61a4; }
+    .card { border:1px solid #eee; border-radius:12px; padding:16px; margin-bottom:12px; }
+    .muted { color:#666; font-size:0.9rem; }
+    .flash { padding:10px 12px; border-radius:8px; margin-bottom:12px; }
+    .flash.success { background:#e7f7ee; border:1px solid #bfe7cf; }
+    .flash.error { background:#fde7e7; border:1px solid #f5bcbc; }
+    form .row { margin: 10px 0; }
+    input[type="text"], input[type="date"], textarea { width:100%; padding:8px; border:1px solid #ccc; border-radius:8px; }
+    textarea { min-height: 200px; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+<header>
+  <h1 style="margin:0;"><a href="{{ url_for('index') }}">個人日誌</a></h1>
+  <nav><a class="btn primary" href="{{ url_for('create_entry') }}">＋ 新增文章</a></nav>
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="flash {{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>
